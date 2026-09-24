@@ -7,14 +7,19 @@ import NewButton from "../../../shared/components/NewButton";
 import { formatarData } from "../../../shared/util/dateUtils";
 import { listar } from "../../../shared/services/crudService";
 import { MAPPING_CONTROLLER_CLIENTE } from "../service/clienteService";
+import { useNavigate } from "react-router-dom";
 
 export default function ClientePage() {
 
    const [lista, setLista] = useState([]);
+   const navigate = useNavigate();
+
 
    useEffect(() => {
        carregar();
    }, []);
+   
+
 
    async function carregar() {
   const data = await listar(MAPPING_CONTROLLER_CLIENTE);
@@ -28,6 +33,14 @@ export default function ClientePage() {
            console.log(id);
        }
    }
+
+   
+    function editar(id) {
+
+        navigate(`/cliente-form/${id}`);
+    }
+    
+
 
    return (
        <div>
